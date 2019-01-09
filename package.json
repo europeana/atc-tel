@@ -1,0 +1,30 @@
+{
+  "name": "@europeana/atc-tel",
+  "description": "Assimilated Traffic Control: HTTP redirection for once-standalone TEL site.",
+  "author": "Richard Doe <richard.doe@europeana.eu>",
+  "keywords": [
+    "code4lib",
+    "http",
+    "redirection",
+    "openwhisk"
+  ],
+  "license": "EUPL-1.1",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.12.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
+  },
+  "engines": {
+    "node": "^10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/atc-tel.git"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js --ignore-path .gitignore .",
+    "test": "nyc --reporter=lcov mocha"
+  },
+  "version": "0.1.0"
+}
