@@ -1,6 +1,4 @@
 const rp = require('request-promise');
-const europeanaPortalRootUrl = 'https://www.europeana.eu/portal';
-const telNewspaperIssueUrlPrefix = '/tel4/newspapers/issue/';
 
 /**
  * @param {Object} params - OpenWhisk parameters
@@ -11,15 +9,15 @@ function main(params) {
     return { statusCode: 400, body: 'europeanaApiKey parameter is required' };
   }
 
-  if (params.__ow_path.indexOf(telNewspaperIssueUrlPrefix) === -1) {
+  if (params.__ow_path.indexOf(main.telNewspaperIssueUrlPrefix) === -1) {
     // TODO: some exceptions to be added for browse pages
-    return { statusCode: 301, headers: { location: `${europeanaPortalRootUrl}/collections/newspapers` } };
+    return { statusCode: 301, headers: { location: `${main.europeanaPortalRootUrl}/collections/newspapers` } };
   }
 
-  const telIssueId = params.__ow_path.substring(telNewspaperIssueUrlPrefix.length);
+  const telIssueId = params.__ow_path.substring(main.telNewspaperIssueUrlPrefix.length);
 
   const options = {
-    uri: 'https://api.europeana.eu/api/v2/search.json',
+    uri: `${main.europeanaApiRootUrl}/v2/search.json`,
     qs: {
       profile: 'params minimal',
       query: 'PROVIDER: "The European Library"',
@@ -38,11 +36,15 @@ function main(params) {
         return { statusCode: 404, body: 'Not Found' };
       }
       const europeanaRecordId = res.items[0].id;
-      const portalUrl = `${europeanaPortalRootUrl}/record${europeanaRecordId}`;
+      const portalUrl = `${main.europeanaPortalRootUrl}/record${europeanaRecordId}`;
       return { statusCode: 301, headers: { location: portalUrl } };
-    }).catch(() => {
+    }).catch((err) => {
       return { statusCode: 500, body: 'Internal Server Error' };
     });
 }
 
-exports.main = main;
+main.europeanaApiRootUrl = 'https://api.europeana.eu/api';
+main.europeanaPortalRootUrl = 'https://www.europeana.eu/portal';
+main.telNewspaperIssueUrlPrefix = '/tel4/newspapers/issue/';
+
+module.exports = main;
