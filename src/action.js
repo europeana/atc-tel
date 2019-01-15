@@ -14,7 +14,6 @@ function main(params) {
   }
 
   if (params.__ow_path.indexOf(main.telNewspaperIssueUrlPrefix) === -1) {
-    // TODO: some exceptions to be added for browse pages
     return { statusCode: 301, headers: { location: `${main.europeanaPortalRootUrl}/collections/newspapers` } };
   }
 
