@@ -8,13 +8,29 @@ describe('action', () => {
     expect(response.statusCode).to.equal(400);
   });
 
-  it('should return 301 redirect to Newspapers collection if not a TEL issue', () => {
-    let response = action({
-      europeanaApiKey: 'XYZ',
-      __ow_path: '/'
+  for (const idx in action.discoverRedirects) {
+    const destination = action.discoverRedirects[idx];
+    it(`should redirect /tel4/newspapers?idx=${idx}&view=discover to ${destination}`, () => {
+      let response = action({
+        europeanaApiKey: 'XYZ',
+        __ow_path: '/tel4/newspapers',
+        idx: idx,
+        view: 'discover'
+      });
+      expect(response.statusCode).to.equal(301);
+      expect(response.headers.location).to.equal(`${action.europeanaPortalRootUrl}${destination}`);
     });
-    expect(response.statusCode).to.equal(301);
-    expect(response.headers.location).to.equal(`${action.europeanaPortalRootUrl}/collections/newspapers`);
+  }
+
+  it('should return 301 redirect to Newspapers collection for other URL paths', () => {
+    for (const path of ['/', '/sitemap', '/about']) {
+      let response = action({
+        europeanaApiKey: 'XYZ',
+        __ow_path: path
+      });
+      expect(response.statusCode).to.equal(301);
+      expect(response.headers.location).to.equal(`${action.europeanaPortalRootUrl}/collections/newspapers`);
+    }
   });
 
   it('should return 301 to issue if found', () => {

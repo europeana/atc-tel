@@ -9,6 +9,10 @@ function main(params) {
     return { statusCode: 400, body: 'europeanaApiKey parameter is required' };
   }
 
+  if (params.__ow_path === '/tel4/newspapers' && params.idx && params.view === 'discover' && main.discoverRedirects[params.idx]) {
+    return { statusCode: 301, headers: { location: `${main.europeanaPortalRootUrl}${main.discoverRedirects[params.idx]}` } };
+  }
+
   if (params.__ow_path.indexOf(main.telNewspaperIssueUrlPrefix) === -1) {
     // TODO: some exceptions to be added for browse pages
     return { statusCode: 301, headers: { location: `${main.europeanaPortalRootUrl}/collections/newspapers` } };
@@ -43,6 +47,11 @@ function main(params) {
     });
 }
 
+main.discoverRedirects = {
+  '1': '/collections/newspapers?q=',
+  '2': '/collections/newspapers/country.html',
+  '3': '/collections/newspapers/a-z.html'
+};
 main.europeanaApiRootUrl = 'https://api.europeana.eu/api';
 main.europeanaPortalRootUrl = 'https://www.europeana.eu/portal';
 main.telNewspaperIssueUrlPrefix = '/tel4/newspapers/issue/';
