@@ -14,7 +14,7 @@ function main(params) {
   }
 
   if (params.__ow_path.indexOf(main.telNewspaperIssueUrlPrefix) === -1) {
-    return { statusCode: 301, headers: { location: `${main.europeanaPortalRootUrl}/collections/newspapers` } };
+    return { statusCode: 301, headers: { location: main.catchallRedirectPath } };
   }
 
   const telIssueId = params.__ow_path.substring(main.telNewspaperIssueUrlPrefix.length);
@@ -41,7 +41,7 @@ function main(params) {
       const europeanaRecordId = res.items[0].id;
       const portalUrl = `${main.europeanaPortalRootUrl}/record${europeanaRecordId}`;
       return { statusCode: 301, headers: { location: portalUrl } };
-    }).catch((err) => {
+    }).catch(() => {
       return { statusCode: 500, body: 'Internal Server Error' };
     });
 }
@@ -54,5 +54,6 @@ main.discoverRedirects = {
 main.europeanaApiRootUrl = 'https://api.europeana.eu/api';
 main.europeanaPortalRootUrl = 'https://www.europeana.eu/portal';
 main.telNewspaperIssueUrlPrefix = '/tel4/newspapers/issue/';
+main.catchallRedirectPath = `${main.europeanaPortalRootUrl}/TEL.html`;
 
 module.exports = main;
