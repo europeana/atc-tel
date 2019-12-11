@@ -8,7 +8,7 @@
     "redirection",
     "openwhisk"
   ],
-  "license": "EUPL-1.1",
+  "license": "EUPL-1.2",
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^6.7.2",
