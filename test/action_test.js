@@ -22,14 +22,14 @@ describe('action', () => {
     });
   }
 
-  it('should return 301 redirect to Newspapers collection for other URL paths', () => {
+  it('should return 301 redirect to TEL static page for other URL paths', () => {
     for (const path of ['/', '/sitemap', '/about']) {
       let response = action({
         europeanaApiKey: 'XYZ',
         __ow_path: path
       });
       expect(response.statusCode).to.equal(301);
-      expect(response.headers.location).to.equal(`${action.europeanaPortalRootUrl}/collections/newspapers`);
+      expect(response.headers.location).to.equal(`${action.europeanaPortalRootUrl}/TEL.html`);
     }
   });
 
