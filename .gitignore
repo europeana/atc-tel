@@ -3,3 +3,5 @@ coverage
 node_modules
 parameters.json
 *.zip
+.env
+.env.*
