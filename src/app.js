@@ -11,7 +11,7 @@ if (config.elasticApm.serverUrl) {
     ...config.elasticApm,
     frameworkName: 'Express.js',
     frameworkVersion: expressPkg.version,
-    serviceName: 'api-proxy-cache',
+    serviceName: 'atc-tel',
     serviceVersion: pkg.version
   };
   elasticApmNode.start(elasticApmOptions);
