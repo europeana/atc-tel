@@ -14,6 +14,7 @@ The handler will inspect the incoming URL path, and:
 ## Dependencies
 
 * Node.js 16
+* [Europeana API key](https://pro.europeana.eu/get-api)
 
 ## Install
 
@@ -36,39 +37,5 @@ npm run start:dev
 ## License
 
 Licensed under the EUPL v1.2.
-
-For full details, see [LICENSE.md](LICENSE.md).
-
-
-
-
-
-## Dependencies
-
-* Node.js 10
-* [Europeana API key](https://pro.europeana.eu/get-api)
-
-## Deploy to OpenWhisk
-
-```
-wsk action create atc/tel src/action.js --web true --kind nodejs:10 -m 128 \
-  --param europeanaApiKey YOUR_API_KEY
-```
-
-## Build for local use
-
-```
-npm install
-```
-
-## Tests
-
-```
-npm test
-```
-
-## License
-
-Licensed under the EUPL V.1.2.
 
 For full details, see [LICENSE.md](LICENSE.md).
