@@ -13,7 +13,7 @@ The handler will inspect the incoming URL path, and:
 
 ## Dependencies
 
-* Node.js 16
+* Node.js 24
 * [Europeana API key](https://pro.europeana.eu/get-api)
 
 ## Install

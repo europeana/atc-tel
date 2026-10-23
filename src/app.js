@@ -1,10 +1,10 @@
 import express from 'express';
 import morgan from 'morgan';
 import elasticApmNode from 'elastic-apm-node';
-import expressPkg from 'express/package.json' assert { type: 'json' };
+import expressPkg from 'express/package.json' with { type: 'json' };
 import config from './config.js';
 import handler from './handler.js';
-import pkg from '../package.json' assert { type: 'json' };
+import pkg from '../package.json' with { type: 'json' };
 
 if (config.elasticApm.serverUrl) {
   const elasticApmOptions = {
