@@ -33,6 +33,6 @@
     "start": "node src/app.js",
     "start:dev": "node -r dotenv/config src/app.js"
   },
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module"
 }
